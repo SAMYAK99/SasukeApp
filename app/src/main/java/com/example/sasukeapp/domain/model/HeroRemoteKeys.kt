@@ -9,9 +9,10 @@ import com.example.sasukeapp.util.Constants.HERO_REMOTE_KEY_DATABASE_TABLE
 * */
 
 @Entity(tableName = HERO_REMOTE_KEY_DATABASE_TABLE)
-data class HeroRemoteKey(
+data class HeroRemoteKeys(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val prevPage: Int?,
-    val nextPage: Int?
+    val nextPage: Int?,
+    val lastUpdated: Long?
 )

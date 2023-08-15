@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,16 +20,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sasukeapp.R
+import com.example.sasukeapp.navigation.Screen
 import com.example.sasukeapp.ui.theme.blue500
 import com.example.sasukeapp.ui.theme.blue700
 
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(
+    navController: NavController ,
+    splashScreenViewModel: SplashScreenViewModel = hiltViewModel()
+) {
+    val onBoardingCompleted by splashScreenViewModel.onBoardingCompleted.collectAsState()
     val degrees = remember { Animatable(0f) }
 
     LaunchedEffect(key1 = true) {
+        // splash screen rotating animation
         degrees.animateTo(
             targetValue = 360f,
             animationSpec = tween(
@@ -35,6 +44,15 @@ fun SplashScreen(navController: NavController) {
                 delayMillis = 200
             )
         )
+        // home screen routing
+        navController.popBackStack()
+        if(onBoardingCompleted){
+            navController.navigate(Screen.Home.route)
+        }
+        else{
+            navController.navigate(Screen.Welcome.route)
+        }
+
     }
     Splash(degrees = degrees.value)
 }

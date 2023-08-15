@@ -3,7 +3,7 @@ package com.example.sasukeapp.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.sasukeapp.data.SasukeDatabase
+import com.example.sasukeapp.data.local.SasukeDatabase
 import com.example.sasukeapp.util.Constants.SASUKE_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -21,9 +21,11 @@ object DatabaseModule {
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(
-        context  ,
-        SasukeDatabase :: class.java ,
-        SASUKE_DATABASE
-    ).build()
+    ) : SasukeDatabase{
+        return Room.databaseBuilder(
+            context  ,
+            SasukeDatabase :: class.java ,
+            SASUKE_DATABASE
+        ).build()
+    }
 }

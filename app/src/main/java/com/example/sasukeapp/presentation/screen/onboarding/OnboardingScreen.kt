@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sasukeapp.R
 import com.example.sasukeapp.domain.model.OnBoardingPage
@@ -45,7 +46,10 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnboardingScreen(navController: NavController) {
+fun OnboardingScreen(
+    navController: NavController ,
+    onboardingViewModel: OnboardingViewModel = hiltViewModel()
+) {
     val pages = listOf(
         OnBoardingPage.First,
         OnBoardingPage.Second,
@@ -80,6 +84,7 @@ fun OnboardingScreen(navController: NavController) {
         ) {
             navController.popBackStack()
             navController.navigate(Screen.Home.route)
+            onboardingViewModel.saveOnBoardingState(true)
         }
     }
 }
