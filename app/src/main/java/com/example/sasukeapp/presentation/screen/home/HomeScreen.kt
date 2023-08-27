@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.sasukeapp.navigation.Screen
+import com.example.sasukeapp.presentation.common.AnimeListContent
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -17,13 +19,15 @@ fun HomeScreen(
     val allHeroes = homeViewModel.getAllHeroes.invoke().collectAsLazyPagingItems()
     Scaffold(
         topBar = {
-            HomeTopBar(onSearchClicked = {})
+            HomeTopBar(onSearchClicked = {
+                navController.navigate(Screen.Search.route)
+            })
         },
         content = {
-//            ListContent(
-//                heroes = allHeroes,
-//                navController = navController
-//            )
+           AnimeListContent(
+               navController = navController ,
+               heroes = allHeroes
+           )
         }
     )
 }

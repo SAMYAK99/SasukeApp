@@ -6,10 +6,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.sasukeapp.data.local.SasukeDatabase
 import com.example.sasukeapp.data.pagingSource.HeroRemoteMediator
+import com.example.sasukeapp.data.pagingSource.SearchHeroesSource
 import com.example.sasukeapp.data.remote.SasukeApi
 import com.example.sasukeapp.domain.model.Hero
 import com.example.sasukeapp.domain.repository.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
+import retrofit2.http.Query
 
 class RemoteDataSourceImpl(
      val sasukeApi: SasukeApi ,
@@ -31,8 +33,16 @@ class RemoteDataSourceImpl(
         ).flow
     }
 
-    override fun searchHeroes(): Flow<PagingData<Hero>> {
-        TODO("Not yet implemented")
+    override fun searchHeroes(query:String): Flow<PagingData<Hero>> {
+        return Pager(
+            config = PagingConfig(pageSize = 3),
+            pagingSourceFactory = {
+                SearchHeroesSource(
+                    sasukeApi = sasukeApi ,
+                    query = query
+                )
+            }
+        ).flow
     }
 
 }

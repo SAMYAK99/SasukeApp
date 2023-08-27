@@ -5,8 +5,10 @@ import com.example.sasukeapp.data.repository.DataStoreOperationsImpl
 import com.example.sasukeapp.data.repository.Repository
 import com.example.sasukeapp.domain.repository.DataStoreOperations
 import com.example.sasukeapp.domain.usecases.GetAllHeroesUseCase
+import com.example.sasukeapp.domain.usecases.GetSelectedHeroUseCase
 import com.example.sasukeapp.domain.usecases.ReadOnBoardingUseCase
 import com.example.sasukeapp.domain.usecases.SaveOnBoardingUseCase
+import com.example.sasukeapp.domain.usecases.SearchHeroesUseCase
 import com.example.sasukeapp.domain.usecases.UseCases
 import dagger.Module
 import dagger.Provides
@@ -35,7 +37,9 @@ object RepositoryModule {
         return  UseCases(
             readOnBoardingUseCase = ReadOnBoardingUseCase(repository) ,
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository) ,
-            getAllHeroesUseCase = GetAllHeroesUseCase(repository)
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository) ,
+            searchHeroesUseCase = SearchHeroesUseCase(repository) ,
+            getSelectedHeroUseCase = GetSelectedHeroUseCase(repository)
         )
     }
 

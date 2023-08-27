@@ -20,6 +20,9 @@ class HeroRemoteMediator(
     private val heroDao = sasukeDatabase.heroDao()
     private val heroRemoteKeyDao = sasukeDatabase.heroRemoteKeyDao()
 
+    /*
+    * Weather any cached data is present in the database or not
+    * */
     override suspend fun initialize(): InitializeAction {
         val currentTime = System.currentTimeMillis()
         val lastUpdated = heroRemoteKeyDao.getRemoteKey(id = 1)?.lastUpdated ?: 0L
@@ -29,6 +32,7 @@ class HeroRemoteMediator(
         return if (diffInMinutes.toInt() <= cacheTimeout) {
             InitializeAction.SKIP_INITIAL_REFRESH
         } else {
+            // When the local data need to fully refreshed
             InitializeAction.LAUNCH_INITIAL_REFRESH
         }
     }

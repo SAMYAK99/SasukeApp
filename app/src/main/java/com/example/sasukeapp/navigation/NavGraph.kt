@@ -6,8 +6,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.sasukeapp.presentation.screen.detail.DetailScreen
 import com.example.sasukeapp.presentation.screen.home.HomeScreen
 import com.example.sasukeapp.presentation.screen.onboarding.OnboardingScreen
+import com.example.sasukeapp.presentation.screen.search.SearchScreen
 import com.example.sasukeapp.presentation.screen.splash.SplashScreen
 import com.example.sasukeapp.util.Constants.DETAILS_ARGUMENT_KEY
 
@@ -32,10 +34,10 @@ fun SetupNavGraph(navController: NavHostController) {
                 type = NavType.IntType
             })
         ) {
-
+              DetailScreen(navController =navController)
         }
         composable(route = Screen.Search.route) {
-
+             SearchScreen(navController = navController)
         }
     }
 }

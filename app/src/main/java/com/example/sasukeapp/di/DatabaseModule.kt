@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.sasukeapp.data.local.SasukeDatabase
+import com.example.sasukeapp.data.repository.LocalDateSourceImpl
+import com.example.sasukeapp.domain.repository.LocalDataSource
 import com.example.sasukeapp.util.Constants.SASUKE_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -27,5 +29,15 @@ object DatabaseModule {
             SasukeDatabase :: class.java ,
             SASUKE_DATABASE
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(
+        sasukeDatabase: SasukeDatabase
+    ) : LocalDataSource{
+        return LocalDateSourceImpl(
+             sasukeDatabase = sasukeDatabase
+        )
     }
 }
