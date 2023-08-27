@@ -23,6 +23,11 @@ val blue500 = Color(0xFF2196F3)
 val LightGray = Color(0xFFD8D8D8)
 val DarkGray = Color(0xFF2A2A2A)
 
+
+val Colors.statusBarColor
+    @Composable
+    get() = if (isLight) blue700 else Color.Black
+
 val Colors.welcomeScreenBackgroundColor
     @Composable
     get() = if (isLight) Color.White else Color.Black
