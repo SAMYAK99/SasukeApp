@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import com.example.sasukeapp.util.Constants.BASE_URL
 import com.example.sasukeapp.util.PalleteGenerator.convertImageUrlToBitmap
 import com.example.sasukeapp.util.PalleteGenerator.extractColorsFromBitmap
 import kotlinx.coroutines.flow.collectLatest
@@ -45,7 +46,7 @@ fun DetailScreen(
             when (event) {
                 is UiEvent.GenerateColorPalette -> {
                     val bitmap = convertImageUrlToBitmap(
-                        imageUrl = "${selectedHero?.image}",
+                        imageUrl = "$BASE_URL${selectedHero?.image}",
                         context = context
                     )
                     if (bitmap != null) {

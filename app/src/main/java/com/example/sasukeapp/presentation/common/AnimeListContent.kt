@@ -126,7 +126,7 @@ fun HeroItem(
             AsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(data = hero.image)
+                    .data(data = "$BASE_URL${hero.image}")
                     .placeholder(drawableResId = R.drawable.placeholder)
                     .error(drawableResId = R.drawable.placeholder)
                     .build(),

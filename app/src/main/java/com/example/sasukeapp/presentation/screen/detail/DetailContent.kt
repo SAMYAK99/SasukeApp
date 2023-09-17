@@ -236,10 +236,10 @@ fun BackgroundContent(
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(fraction = imageFraction + 0.4f)
+                .fillMaxHeight(fraction = imageFraction + 0.45f)
                 .align(Alignment.TopStart),
             model = ImageRequest.Builder(LocalContext.current)
-                .data(data = heroImage)
+                .data(data = "$BASE_URL${heroImage}")
                 .placeholder(drawableResId = R.drawable.placeholder)
                 .error(drawableResId = R.drawable.placeholder)
                 .build(),
